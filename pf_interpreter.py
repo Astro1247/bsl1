@@ -3,6 +3,7 @@ from pfcode_translator import postfixTranslator, postfixCode, FSuccess
 from stack1 import Stack
 
 from lexer import tableOfWrite
+import sys
 
 stack = Stack()
 n = 0
@@ -319,18 +320,18 @@ def failRunTime(str, tuple):
     if str == 'невідповідність типів':
         ((lexL, tokL), lex, (lexR, tokR)) = tuple
         print('RunTime ERROR: \n\t Типи операндів відрізняються у {0} {1} {2}'.format((lexL, tokL), lex, (lexR, tokR)))
-        exit(1)
+        sys.exit(1)
     elif str == 'неініціалізована змінна':
         (lx, rec, (lexL, tokL), lex, (lexR, tokR)) = tuple
         print('RunTime ERROR: \n\t Значення змінної {0}:{1} не визначене. Зустрылось у {2} {3} {4}'.format(lx, rec,
                                                                                                            (lexL, tokL),
                                                                                                            lex, (
                                                                                                            lexR, tokR)))
-        exit(2)
+        sys.exit(2)
     elif str == 'ділення на нуль':
         ((lexL, tokL), lex, (lexR, tokR)) = tuple
         print('RunTime ERROR: \n\t Ділення на нуль у {0} {1} {2}. '.format((lexL, tokL), lex, (lexR, tokR)))
-        exit(3)
+        sys.exit(3)
 
 
 #postfixInterpreter()

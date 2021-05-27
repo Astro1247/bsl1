@@ -1,5 +1,6 @@
 # FSuccess - ознака успішності розбору
 from function import function
+import sys
 
 function()
 FSuccess = (True, 'Lexer')
@@ -140,17 +141,17 @@ def fail():
     print(numLine)
     if state == 101:
         print('у рядку ', numLine, ' неочікуваний символ ' + char)
-        exit(101)
+        sys.exit(101)
     if state == 102:
         print('у рядку ', numLine, ' очікувався символ =, а не ' + char)
-        exit(102)
+        sys.exit(102)
     if state == 103:
         print('у рядку ', numLine, ' неочікуваний символ після and ' + char)
     if state == 105:
         print('у рядку ', numLine, ' неочікуваний символ після or ' + char)
     else:
         print('у рядку ', numLine, ' неочікуваний символ ' + char)
-        exit(111)
+        sys.exit(111)
 
 
 def is_final(state):

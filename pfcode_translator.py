@@ -1,5 +1,6 @@
 from lexer import lex, tableToPrint
 from lexer import tableOfSymb, tableOfId, tableOfConst, tableOfLabel, sourceCode, FSuccess
+import sys
 
 # FSuccessTr = (False,'Translator')
 
@@ -113,36 +114,36 @@ def failParse(str, tuple):
         print(
             'Parser ERROR: \n\t Неочікуваний кінець програми - в таблиці символів (розбору) немає запису з номером {1}. \n\t Очікувалось - {0}'.format(
                 (lexeme, token), numRow))
-        exit(1001)
+        sys.exit(1001)
     if str == 'getSymb(): неочікуваний кінець програми':
         numRow = tuple
         print(
             'Parser ERROR: \n\t Неочікуваний кінець програми - в таблиці символів (розбору) немає запису з номером {0}. \n\t Останній запис - {1}'.format(
                 numRow, tableOfSymb[numRow - 1]))
-        exit(1002)
+        sys.exit(1002)
     elif str == 'невідповідність токенів':
         (numLine, lexeme, token, lex, tok) = tuple
         print('Parser ERROR: \n\t В рядку {0} неочікуваний елемент ({1},{2}). \n\t Очікувався - ({3},{4}).'.format(
             numLine, lexeme, token, lex, tok))
-        exit(1)
+        sys.exit(1)
     elif str == 'невідповідність інструкцій':
         (numLine, lex, tok, expected) = tuple
         print(
             'Parser ERROR: \n\t В рядку {0} неочікуваний елемент ({1},{2}). \n\t Очікувався - {3}.'.format(numLine, lex,
                                                                                                            tok,
                                                                                                            expected))
-        exit(2)
+        sys.exit(2)
     elif str == 'невідповідність у Expression.Factor':
         (numLine, lex, tok, expected) = tuple
         print(
             'Parser ERROR: \n\t В рядку {0} неочікуваний елемент ({1},{2}). \n\t Очікувався - {3}.'.format(numLine, lex,
                                                                                                            tok,
                                                                                                            expected))
-        exit(3)
+        sys.exit(3)
     elif str == 'Тіло циклу порожнє.':
         (numLine, lex, tok) = tuple
         print('Parser ERROR: \n\t В рядку {0}. \n\t Тіло циклу for порожнє.'.format(numLine))
-        exit(4)
+        sys.exit(4)
 
 
 # Функція для розбору за правилом для StatementList
@@ -480,7 +481,7 @@ def createLabel():
     else:
         tok = 'Конфлікт міток'
         print(tok)
-        exit(1003)
+        sys.exit(1003)
     return (lexeme, tok)
 
 
