@@ -17,10 +17,9 @@ def postfixInterpreter():
     if (True, 'Translator') == FSuccess:
         print('\nПостфіксний код: \n{0}'.format(postfixCode))
         return postfixProcessing()
-    else:
-        # Повідомити про факт виявлення помилки
-        print('Interpreter: Translator завершив роботу аварійно')
-        return False
+    # Повідомити про факт виявлення помилки
+    print('Interpreter: Translator завершив роботу аварійно')
+    return False
 
 
 print('-' * 30)

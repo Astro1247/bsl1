@@ -88,12 +88,11 @@ def parseToken(lexeme, token, indent):
     if (lex, tok) == (lexeme, token):
         # вивести у консоль номер рядка програми та лексему і токен
         return True
-    else:
-        # згенерувати помилку та інформацію про те, що
-        # лексема та токен таблиці розбору (lex,tok) відрізняються від
-        # очікуваних (lexeme,token)
-        failParse('невідповідність токенів', (numLine, lex, tok, lexeme, token))
-        return False
+    # згенерувати помилку та інформацію про те, що
+    # лексема та токен таблиці розбору (lex,tok) відрізняються від
+    # очікуваних (lexeme,token)
+    failParse('невідповідність токенів', (numLine, lex, tok, lexeme, token))
+    return False
 
 
 # Прочитати з таблиці розбору поточний запис
@@ -164,30 +163,28 @@ def parseStatement():
     if tok == 'ident':
         parseAssign()
         return True
-    elif (lex, tok) == ('if', 'keyword'):
+    if (lex, tok) == ('if', 'keyword'):
         parseIf()
         return True
-    elif (lex, tok) == ('do', 'keyword'):
+    if (lex, tok) == ('do', 'keyword'):
         parseWhile()
         return True
-    elif lex == 'input':
+    if lex == 'input':
         parseInput()
         return True
-    elif lex == 'print':
+    if lex == 'print':
         parsePrint()
         return True
 
     # тут - ознака того, що всі інструкції були коректно
     # розібрані і була знайдена остання лексема програми.
     # тому parseStatement() має завершити роботу
-    elif (lex, tok) == ('end', 'keyword'):
+    if (lex, tok) == ('end', 'keyword'):
         return False
-
-    else:
-        # жодна з інструкцій не відповідає
-        # поточній лексемі у таблиці розбору,
-        failParse('невідповідність інструкцій', (numLine, lex, tok, 'ident або if'))
-        return False
+    # жодна з інструкцій не відповідає
+    # поточній лексемі у таблиці розбору,
+    failParse('невідповідність інструкцій', (numLine, lex, tok, 'ident або if'))
+    return False
 
 
 def parsePrint():
@@ -228,8 +225,7 @@ def readWriteMany(lexApp, tokApp):
         parseExpression()
         postfixCode.append((lexApp, tokApp))
         return True
-    else:
-        return False
+    return False
 
 
 def parseAssign():
@@ -261,8 +257,7 @@ def parseAssign():
         # додається після своїх операндів
         if toView: configToPrint(':=', numRow)
         return True
-    else:
-        return False
+    return False
 
 
 # виводить у консоль інформацію про
@@ -377,8 +372,7 @@ def parseWhile():
         postfixCode.append(w2)
         postfixCode.append((':', 'colon'))
         return True
-    else:
-        return False
+    return False
 
 
 def parseIf():
@@ -421,8 +415,7 @@ def parseIf():
         postfixCode.append((':', 'colon'))
         # додали m2 JMP m1 :
         return True
-    else:
-        return False
+    return False
 
 
 def parseBoolExpr():
@@ -455,8 +448,7 @@ def andOr():
         parseBoolExpr()
         postfixCode.append((lex, tok))
         return True
-    else:
-        return False
+    return False
 
 
 def exprMany():
@@ -466,8 +458,7 @@ def exprMany():
         numRow += 1
         parseStatement()
         return True
-    else:
-        return False
+    return False
 
 
 def createLabel():

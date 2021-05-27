@@ -157,8 +157,7 @@ def fail():
 def is_final(state):
     if (state in F):
         return True
-    else:
-        return False
+    return False
 
 
 def nextState(state, classCh):
